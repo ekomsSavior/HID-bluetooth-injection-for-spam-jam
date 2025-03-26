@@ -44,20 +44,29 @@ Once successful, the dongle should reboot and appear as a USB mass storage devic
 
 1. Once you have CircuitPython installed on the dongle (shows up as CIRCUITPY), create this file:
 
+
 # code.py
 
 import time
+
 import usb_hid
+
 from adafruit_hid.keyboard import Keyboard
+
 from adafruit_hid.keycode import Keycode
 
 kbd = Keyboard(usb_hid.devices)
 
 time.sleep(2)
+
 kbd.send(Keycode.WINDOWS, Keycode.R)
+
 time.sleep(0.5)
+
 kbd.write("notepad\n")
+
 time.sleep(0.5)
+
 kbd.write("HACK THE PLANET 💻✨🌍\n")
 
 2. Save it, eject the drive, and plug the dongle into a test machine with Bluetooth HID support (can test wired first).
