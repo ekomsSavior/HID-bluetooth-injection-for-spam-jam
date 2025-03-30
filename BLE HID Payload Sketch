@@ -1,0 +1,72 @@
+#include <bluefruit.h>
+#include "Adafruit_TinyUSB.h"
+
+// Create device info and HID services
+BLEDis bledis;
+BLEHidAdafruit blehid;
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) delay(10);
+
+  Serial.println("🔵 Starting BLE HID keyboard (Spam Jam Mode)");
+
+  // Initialize BLE stack
+  Bluefruit.begin();
+  Bluefruit.setName("SpamJam_HID");
+  Bluefruit.Periph.setConnectCallback(connect_callback);
+
+  // Set up device info
+  bledis.setManufacturer("Spam Jam Inc.");
+  bledis.setModel("SJ-BLE-Key");
+  bledis.begin();
+
+  // Set up HID
+  blehid.begin();
+  Bluefruit.setTxPower(4); // max power for good signal
+
+  Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
+  Bluefruit.Advertising.addTxPower();
+  Bluefruit.Advertising.addAppearance(BLE_APPEARANCE_HID_KEYBOARD);
+  Bluefruit.Advertising.addService(blehid);
+  Bluefruit.Advertising.addName();
+
+  Bluefruit.Advertising.start();
+  Serial.println("💡 Advertising as BLE keyboard...");
+}
+
+void loop() {
+  // No loop actions needed for this simple payload
+}
+
+void connect_callback(uint16_t conn_handle) {
+  Serial.println("🟢 Device connected! Injecting payload...");
+
+  delay(1000); // small delay to let OS register the device
+
+  if (Bluefruit.connected()) {
+    // Press Enter
+    blehid.keyPress(HID_KEY_RETURN);
+    delay(300);
+    blehid.keyRelease();
+
+    delay(300);
+
+    // Type "Hello from Spam Jam"
+    const char* msg = "Hello from Spam Jam!";
+    while (*msg) {
+      blehid.keyPress(*msg);
+      delay(5);
+      blehid.keyRelease();
+      msg++;
+      delay(20);
+    }
+
+    // Press Enter again
+    blehid.keyPress(HID_KEY_RETURN);
+    delay(300);
+    blehid.keyRelease();
+
+    Serial.println("✅ Payload complete!");
+  }
+}
