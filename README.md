@@ -1,95 +1,107 @@
-# HID-injection-for-spam-jam
+# HID-Bluetooth keyboard injection
 
 ✨✨✨ an ekoms and m0usem0use bluetooth production in conjuction with the makers of Jam_fi your scariest wifi fren ✨✨✨
 
- Bluetooth HID Injection for spam jam and GeeekPi nRF52840 USB Dongle
+ Bluetooth HID keyboard injection for GeeekPi nRF52840 USB Dongle
 
 The GeeekPi nRF52840 USB Dongle is actually a great choice for Bluetooth HID injection. It’s based on the Nordic nRF52840 chip,
 WHICH:
 
-Fully supports Bluetooth Low Energy (BLE)
-
 Can emulate Bluetooth HID devices like keyboards and mice
 
-Is compatible with Adafruit's CircuitPython, nRF Connect SDK, and ZMK / Zephyr OS
+Step-by-Step Setup
 
-Has existing support for HID over GATT (HoG) — which is how those stealthy keyboard injections work!
+✅Step 1: Install Arduino IDE (install on your host machine if you're running a vm linux)
 
-✅ Step 1: Install Adafruit Bootloader
-📦 Needed Tools:
+If you don’t have it yet:
 
-Zadig for USB driver installation (Windows only)
+bash-
 
-nrfutil for flashing
+sudo apt update
 
-The Adafruit nRF52 Bootloader .zip from here:
+sudo apt install arduino
 
-https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases
+💻 Or grab it from https://www.arduino.cc/en/software
 
-🧪 Instructions :
+✅ Step 2: insert nRF52840 dongle into usb 2.0 port 
 
-1. Hold down the reset button and plug the dongle in (it should appear as "DFU mode" or "Unknown USB").
+✅ Step 3: 
 
-2. Use Zadig to replace the driver with libusb-win32 or WinUSB.
+Open Preferences
 
-3. Flash the Adafruit bootloader:
+Go to:
 
-nrfutil dfu usb-serial -pkg adafruit_nrf52_bootloader.zip -p COMX
+File > Preferences
 
-(Replace COMX with the correct port shown in Device Manager)
+Additional Board URLs
 
-Once successful, the dongle should reboot and appear as a USB mass storage device.
+Make sure this exact line is there:
 
-✅ Step 2: Load a HID Payload in CircuitPython
+[https://www.adafruit.com/package_adafruit_index.json](https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+)
 
-1. Once you have CircuitPython installed on the dongle (shows up as CIRCUITPY), create this file:
+Restart Arduino IDE
+
+✅ Step 4: Install the Board Package
+
+In Arduino IDE go to:
+
+Tools > Board > Boards Manager
+
+In the search bar, type:
+
+nrf52
+
+You’ll see “Adafruit nRF52 by Adafruit”.
+
+Click Install ✅
+
+Go to: 
+
+Tools > Board > Adafruit Feather nRF52840 Express
+
+Find com port:
+
+Go to:
+
+Tools > Port
+
+choose com3 
+
+paste your choice of sketch found in main page of repository into arduino 
+
+go to:
+
+sketch tab  
+
+choose 
+
+upload 
+
+-----------------------------------------------
+
+After upload, it should advertise as: SpamJam_HID
+
+On your phone or test PC:
+
+Pair with SpamJam_HID
+
+It will type: Hello from Spam Jam! and press Enter
+
+Next Steps for this project:
+
+Once you confirm it types stuff when paired: ✅
+
+customize the payload (PowerShell commands, downloaders, fake login prompts, etc.)
+
+let user choose payload type windows, mac or linux.
+
+Add a menu in Spam Jam to let the user trigger attacks from Kali 
 
 
-# code.py
 
-import time
 
-import usb_hid
 
-from adafruit_hid.keyboard import Keyboard
-
-from adafruit_hid.keycode import Keycode
-
-kbd = Keyboard(usb_hid.devices)
-
-time.sleep(2)
-
-kbd.send(Keycode.WINDOWS, Keycode.R)
-
-time.sleep(0.5)
-
-kbd.write("notepad\n")
-
-time.sleep(0.5)
-
-kbd.write("HACK THE PLANET 💻✨🌍\n")
-
-2. Save it, eject the drive, and plug the dongle into a test machine with Bluetooth HID support (can test wired first).
-
-NEXT WE WILL :
-
-✅ Confirm the Adafruit bootloader was flashed
-
-✅ Confirm CircuitPython is working
-
-✅ Test HID injection (wired or Bluetooth, depending on available firmware)
-
-If this works, we’ll move on to BLE HID injection using nrf Connect SDK or a custom SoftDevice-based payload. Our final goal is:
-
-🎯 Spam Jam Feature Goal:
-
-A menu to detect compatible nRF52840 dongles
-
-Flash + inject HID BLE payloads wirelessly
-
-Choose from payloads (Notepad, reverse shell, browser macros, emoji spam 💖)
-
-Toggle BLE keyboard mode inside Spam Jam
 
 
 
