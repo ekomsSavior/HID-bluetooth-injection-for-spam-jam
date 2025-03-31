@@ -21,7 +21,7 @@ sudo apt update
 
 sudo apt install arduino
 
-💻 Or grab it from https://www.arduino.cc/en/software
+💻 Or grab it from https://www.arduino.cc/en/software  (best for windows machines)
 
 ✅ Step 2: insert nRF52840 dongle into usb 2.0 port 
 
