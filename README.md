@@ -41,8 +41,7 @@ Additional Board URLs
 
 Make sure this exact line is there:
 
-[https://www.adafruit.com/package_adafruit_index.json](https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
-)
+https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
 
 Restart Arduino IDE
 
