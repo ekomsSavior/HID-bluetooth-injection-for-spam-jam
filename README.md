@@ -68,7 +68,7 @@ Tools > Port
 
 choose com3 
 
-paste your choice of sketch found in main page of repository into arduino 
+paste spamjam_hid_attack.ino (found in main page of repository) into arduino 
 
 go to:
 
