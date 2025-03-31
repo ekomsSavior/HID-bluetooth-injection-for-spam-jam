@@ -90,7 +90,7 @@ It will type: Hello from Spam Jam! and press Enter
 
 Next Steps for this project:
 
-Once you confirm it types stuff when paired: ✅
+Once we confirm it executes payload when paired: ✅
 
 customize the payload (PowerShell commands, downloaders, fake login prompts, etc.)
 
