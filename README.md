@@ -68,7 +68,7 @@ Tools > Port
 
 choose com3 
 
-paste spamjam_hid_attack.ino (found in main page of repository) into arduino 
+paste spamjam_hid_attack.ino https://github.com/ekomsSavior/HID-injection-for-spam-jam/blob/main/spamjam_hid_attack.ino into arduino 
 
 go to:
 
