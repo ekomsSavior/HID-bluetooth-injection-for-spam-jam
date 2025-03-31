@@ -11,7 +11,9 @@ Can emulate Bluetooth HID devices like keyboards and mice
 
 Step-by-Step Setup
 
-✅Step 1: Install Arduino IDE (install on your host machine if you're running a vm linux)
+✅Step 1:
+
+Install Arduino IDE (install on your host machine if you're running a vm linux)
 
 If you don’t have it yet:
 
@@ -23,7 +25,9 @@ sudo apt install arduino
 
 💻 Or grab it from https://www.arduino.cc/en/software  (best for windows machines)
 
-✅ Step 2: insert nRF52840 dongle into usb 2.0 port 
+✅ Step 2:
+
+insert nRF52840 dongle into usb 2.0 port 
 
 ✅ Step 3: 
 
